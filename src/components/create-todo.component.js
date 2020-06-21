@@ -58,8 +58,8 @@ export default class CreateTodo extends Component {
 
                     <div className="form-group my-8">
                         <input type="submit" value="Create Todo" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" />
-                        <input type="button" value="Cancel" onClick={this.cancelEdit} disabled
-                          className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mx-4 rounded cursor-not-allowed"/>
+                        <input type="button" value="Cancel" onClick={this.cancel}
+                          className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mx-4 rounded cursor-pointer"/>
                     </div>
                 </form>
             </div>
@@ -107,4 +107,6 @@ export default class CreateTodo extends Component {
           completed: false
       });
     }
+
+    cancel = () => this.props.history.push('/');
 }

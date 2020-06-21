@@ -59,9 +59,7 @@ export default class EditTodo extends Component {
       });
   }
 
-  cancelEdit() {
-    
-  }
+  cancelEdit = () => this.props.history.push('/');
 
   onSubmit(e) {
     e.preventDefault();
@@ -86,7 +84,7 @@ export default class EditTodo extends Component {
               <div className="form-group my-6"> 
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Title: </label>
                   <input  type="text"
-                          className="appearance-none block w-1/3 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          className="appearance-none block w-full lg:w-1/3 md:w-1/2 sm:w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           value={this.state.title}
                           onChange={this.onChangeTodoDescription}
                           />
@@ -95,7 +93,7 @@ export default class EditTodo extends Component {
                   <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">User: </label>
                   <input 
                           type="text" 
-                          className="appearance-none block w-1/3 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          className="appearance-none block w-full lg:w-1/3 md:w-1/2 sm:w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           value={this.state.user}
                           onChange={this.onChangeTodoResponsible}
                           />
@@ -104,7 +102,7 @@ export default class EditTodo extends Component {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Priority: </label>
                   <select 
                     onChange={this.onChangeTodoPriority}
-                    className="block appearance-none w-1/3 cursor-pointer bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="block appearance-none w-full lg:w-1/3 md:w-1/2 sm:w-full cursor-pointer bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   >
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
@@ -133,8 +131,8 @@ export default class EditTodo extends Component {
               <div className="form-group my-8">
                   <input type="submit" value="Update Todo"
                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"/>
-                <input type="button" value="Cancel" onClick={this.cancelEdit} disabled
-                   className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mx-4 rounded cursor-not-allowed"/>
+                <input type="button" value="Cancel" onClick={this.cancelEdit}
+                   className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mx-4 rounded cursor-pointer"/>
               </div>
           </form>
         </div>
