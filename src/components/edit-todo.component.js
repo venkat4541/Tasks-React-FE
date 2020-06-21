@@ -12,10 +12,10 @@ export default class EditTodo extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-        todo_description: '',
-        todo_responsible: '',
-        todo_priority: '',
-        todo_completed: false
+        title: '',
+        user: '',
+        priority: '',
+        completed: false
     }
   }
   
@@ -23,10 +23,10 @@ export default class EditTodo extends Component {
     axios.get('http://localhost:8080/todos/'+this.props.match.params.id)
       .then(response => {
         this.setState({
-          todo_description: response.data.todo_description,
-          todo_responsible: response.data.todo_responsible,
-          todo_priority: response.data.todo_priority,
-          todo_completed: response.data.todo_completed
+          title: response.data.title,
+          user: response.data.user,
+          priority: response.data.priority,
+          completed: response.data.completed
         })   
       })
       .catch((error) => {
@@ -36,117 +36,105 @@ export default class EditTodo extends Component {
 
   onChangeTodoDescription(e) {
     this.setState({
-        todo_description: e.target.value
+        title: e.target.value
     });
   }
 
   onChangeTodoResponsible(e) {
       this.setState({
-          todo_responsible: e.target.value
+          user: e.target.value
       });
   }
 
   onChangeTodoPriority(e) {
+      console.log('Priority: ', e.target.value)
       this.setState({
-          todo_priority: e.target.value
+          priority: e.target.value
       });
   }
 
   onChangeTodoCompleted(e) {
       this.setState({
-          todo_completed: !this.state.todo_completed
+          completed: !this.state.completed
       });
+  }
+
+  cancelEdit() {
+    
   }
 
   onSubmit(e) {
     e.preventDefault();
     const obj = {
-        todo_description: this.state.todo_description,
-        todo_responsible: this.state.todo_responsible,
-        todo_priority: this.state.todo_priority,
-        todo_completed: this.state.todo_completed
+        title: this.state.title,
+        user: this.state.user,
+        priority: this.state.priority,
+        completed: this.state.completed
     };
     axios.post('http://localhost:8080/todos/update/'+this.props.match.params.id, obj)
         .then(res => {
           console.log(res.data);
+          this.props.history.push('/');
       });
-    
-    this.props.history.push('/');
   }
 
   render() {
       return (
-        <div>
-          <h3 align="center">Update Todo</h3>
+        <div className="px-8 py-2">
+          <h3>Update Todo</h3>
           <form onSubmit={this.onSubmit}>
-              <div className="form-group"> 
-                  <label>Description: </label>
+              <div className="form-group my-6"> 
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Title: </label>
                   <input  type="text"
-                          className="form-control"
-                          value={this.state.todo_description}
+                          className="appearance-none block w-1/3 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          value={this.state.title}
                           onChange={this.onChangeTodoDescription}
                           />
               </div>
-              <div className="form-group">
-                  <label>Responsible: </label>
+              <div className="form-group my-6">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">User: </label>
                   <input 
                           type="text" 
-                          className="form-control"
-                          value={this.state.todo_responsible}
+                          className="appearance-none block w-1/3 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          value={this.state.user}
                           onChange={this.onChangeTodoResponsible}
                           />
               </div>
-              <div className="form-group">
-                  <div className="form-check form-check-inline">
-                      <input  className="form-check-input" 
-                              type="radio" 
-                              name="priorityOptions" 
-                              id="priorityLow" 
-                              value="Low"
-                              checked={this.state.todo_priority==='Low'} 
-                              onChange={this.onChangeTodoPriority}
-                              />
-                      <label className="form-check-label">Low</label>
-                  </div>
-                  <div className="form-check form-check-inline">
-                      <input  className="form-check-input" 
-                              type="radio" 
-                              name="priorityOptions" 
-                              id="priorityMedium" 
-                              value="Medium" 
-                              checked={this.state.todo_priority==='Medium'} 
-                              onChange={this.onChangeTodoPriority}
-                              />
-                      <label className="form-check-label">Medium</label>
-                  </div>
-                  <div className="form-check form-check-inline">
-                      <input  className="form-check-input" 
-                              type="radio" 
-                              name="priorityOptions" 
-                              id="priorityHigh" 
-                              value="High" 
-                              checked={this.state.todo_priority==='High'} 
-                              onChange={this.onChangeTodoPriority}
-                              />
-                      <label className="form-check-label">High</label>
+              <div className="form-group my-6">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Priority: </label>
+                  <select 
+                    onChange={this.onChangeTodoPriority}
+                    className="block appearance-none w-1/3 cursor-pointer bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  >
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                   </div>
               </div>
-              <div className="form-check">
-                  <input  className="form-check-input"
-                          id="completedCheckbox"
-                          type="checkbox"
-                          name="completedCheckbox"
-                          onChange={this.onChangeTodoCompleted}
-                          checked={this.state.todo_completed}
-                          value={this.state.todo_completed}
-                          />
-                  <label className="form-check-label" htmlFor="completedCheckbox">
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                  <label className="md:w-2/3 block text-gray-500 font-bold">
+                    <input
+                      name="completedCheckbox"
+                      onChange={this.onChangeTodoCompleted}
+                      checked={this.state.completed}
+                      value={this.state.completed}
+                      className="mr-2 leading-tight cursor-pointer" type="checkbox"
+                    />
+                    <span className="text-md">
                       Completed
-                  </label>                        
+                    </span>
+                  </label>
+                </div>
               </div>
-              <br />
-              <div className="form-group">
-                  <input type="submit" value="Update Todo" className="btn btn-primary" />
+              <div className="form-group my-8">
+                  <input type="submit" value="Update Todo"
+                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"/>
+                <input type="button" value="Cancel" onClick={this.cancelEdit} disabled
+                   className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 mx-4 rounded cursor-not-allowed"/>
               </div>
           </form>
         </div>
