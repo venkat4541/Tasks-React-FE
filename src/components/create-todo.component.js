@@ -90,7 +90,7 @@ export default class CreateTodo extends Component {
       const newTodo = {
           title: this.state.title,
           user: this.state.user,
-          priority: this.state.priority,
+          priority: this.state.priority ? this.state.priority : 'Low',
           completed: this.state.completed
       };
 
