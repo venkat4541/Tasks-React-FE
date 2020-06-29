@@ -10,7 +10,7 @@ export default class TodosList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/todos/')
+    axios.get('http://localhost:5000/todos/')
       .then(response => {
         this.setState({ todos: response.data });
       })
@@ -20,14 +20,9 @@ export default class TodosList extends Component {
   }
 
   todoList() {
-    if (this.state.todos.length) {
-      return this.state.todos.map((currentTodo, i) => {
-        return this.renderTodo({todo: currentTodo, key: i});
-      });
-    } else {
-      return (<div className="text-center">No more pending tasks!</div>)
-    }
-
+    return this.state.todos.map((currentTodo, i) => {
+      return this.renderTodo({todo: currentTodo, key: i});
+    });
   }
 
   // markAsComplete = (id) => {
@@ -36,14 +31,14 @@ export default class TodosList extends Component {
   //     completed: !this.state.completed
   //   };
   //   console.log('after: ', this.state);
-  //   axios.post('http://localhost:8080/todos/update/'+id, obj)
+  //   axios.post('http://localhost:5000/todos/update/'+id, obj)
   //   .then(res => {
   //     // window.location.reload(false);
   //   });
   // }
 
   deleteTask = (id) => {
-    axios.post('http://localhost:8080/todos/delete/'+id)
+    axios.post('http://localhost:5000/todos/delete/'+id)
     .then(res => {
       window.location.reload(false);
     });

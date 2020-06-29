@@ -94,7 +94,7 @@ export default class CreateTodo extends Component {
           completed: this.state.completed
       };
 
-      axios.post('http://localhost:8080/todos/add', newTodo)
+      axios.post('http://localhost:5000/todos/add', newTodo)
           .then(res => {
             console.log(res.data);
             this.props.history.push('/');

@@ -20,7 +20,7 @@ export default class EditTodo extends Component {
   }
   
   componentDidMount() {
-    axios.get('http://localhost:8080/todos/'+this.props.match.params.id)
+    axios.get('http://localhost:5000/todos/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           title: response.data.title,
@@ -69,7 +69,7 @@ export default class EditTodo extends Component {
         priority: this.state.priority,
         completed: this.state.completed
     };
-    axios.post('http://localhost:8080/todos/update/'+this.props.match.params.id, obj)
+    axios.post('http://localhost:5000/todos/update/'+this.props.match.params.id, obj)
         .then(res => {
           console.log(res.data);
           this.props.history.push('/');
