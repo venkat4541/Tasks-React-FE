@@ -10,7 +10,7 @@ export default class TodosList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/todos/')
+    axios.get('http://localhost:5000/api/todos/')
       .then(response => {
         this.setState({ todos: response.data });
       })
@@ -31,14 +31,14 @@ export default class TodosList extends Component {
   //     completed: !this.state.completed
   //   };
   //   console.log('after: ', this.state);
-  //   axios.post('http://localhost:5000/todos/update/'+id, obj)
+  //   axios.post('http://localhost:5000/api/todos/update/'+id, obj)
   //   .then(res => {
   //     // window.location.reload(false);
   //   });
   // }
 
   deleteTask = (id) => {
-    axios.post('http://localhost:5000/todos/delete/'+id)
+    axios.post('http://localhost:5000/api/todos/delete/'+id)
     .then(res => {
       window.location.reload(false);
     });
@@ -67,7 +67,7 @@ export default class TodosList extends Component {
 
   render() {
     return (
-      <div className="px-8 py-2 mt-10">
+      <div className="px-8 py-2 mt-10 text-center">
         <h3 className="text-2xl font-bold text-center text-teal-700">Your tasks</h3>
         <table className="table-fixed text mx-auto my-0" style={{ marginTop: 20 }} >
           <thead>
@@ -82,6 +82,9 @@ export default class TodosList extends Component {
             { this.todoList() }
           </tbody>
         </table>
+        <Link to="/create"
+            className="inline-block text-sm px-8 py-3 leading-none rounded text-teal-400 bg-teal-100 border-solid border-2 border-teal-200 hover:border-transparent hover:text-white hover:bg-teal-500 mt-6"
+        >Add a new task</Link>
       </div>
   )}
 }

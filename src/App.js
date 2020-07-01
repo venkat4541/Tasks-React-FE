@@ -29,10 +29,7 @@ function App() {
               <div>
                   <Link to="/" 
                     className="inline-block text-sm px-4 py-2 leading-none rounded text-teal-200 hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-                  >Todos</Link>
-                  <Link to="/create"
-                    className="inline-block text-sm px-4 py-2 leading-none rounded text-teal-200 hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
-                  >Create ToDo</Link>
+                  >LOGIN</Link>
               </div>
             </div>
           </nav>
