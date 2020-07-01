@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreateTodo from "./components/create-todo.component";
 import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
+import Register from "./components/auth/register.component";
+import Login from "./components/auth/login.component";
 
 function App() {
   return (
@@ -27,7 +29,7 @@ function App() {
               <div className="text-sm lg:flex-grow">
               </div>
               <div>
-                  <Link to="/" 
+                  <Link to="/login" 
                     className="inline-block text-sm px-4 py-2 leading-none rounded text-teal-200 hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
                   >LOGIN</Link>
               </div>
@@ -37,6 +39,8 @@ function App() {
           <Route path="/" exact component={TodosList} />
           <Route path="/edit/:id" component={EditTodo} />
           <Route path="/create" component={CreateTodo} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
         </div>
       </div>
     </Router>
