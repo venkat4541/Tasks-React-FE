@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // eslint-disable-next-line 
+import { registerUser } from "../../utils/authActions";
 
 class Register extends Component {
     constructor() {
@@ -28,6 +29,9 @@ class Register extends Component {
         };
 
         console.log('New user: ', newUser);
+
+        registerUser(newUser); 
+
     }
 
     render() {
